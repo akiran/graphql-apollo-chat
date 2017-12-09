@@ -22,8 +22,13 @@ export default `
     addMessage(text: String!): Message
   }
 
+  type Subscription {
+    onNewMessage: Message
+  }
+
   schema {
     query: Query
     mutation: Mutation
+    subscription: Subscription
   }
 `;

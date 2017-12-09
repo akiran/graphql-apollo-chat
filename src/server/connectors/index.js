@@ -1,4 +1,5 @@
 import uuid from "uuid";
+import pubsub from "../pubsub";
 
 let users = [{ firstName: "Bot", lastName: "", id: "1" }];
 let messages = [{ id: "1", user: "1", text: "Lets chat ..." }];
@@ -31,5 +32,6 @@ export function addMessage({ text }) {
     text
   };
   messages = messages.concat(newMessage);
+  pubsub.publish("ON_NEW_MESSAGE", newMessage);
   return newMessage;
 }

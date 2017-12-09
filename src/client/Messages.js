@@ -3,6 +3,9 @@ import gql from "graphql-tag";
 import { graphql } from "react-apollo";
 
 export class Messages extends React.Component {
+  componentDidMount() {
+    this.props.subscribeToNewMessage();
+  }
   render() {
     console.log(this.props);
     const { data: { messages, loading } } = this.props;
@@ -26,4 +29,33 @@ const messagesQuery = gql`
   }
 `;
 
-export default graphql(messagesQuery)(Messages);
+const messageSubscribe = gql`
+  subscription {
+    onNewMessage {
+      id
+      text
+    }
+  }
+`;
+
+export default graphql(messagesQuery, {
+  props: props =>
+    Object.assign({}, props, {
+      subscribeToNewMessage: params => {
+        console.log(props);
+        return props.data.subscribeToMore({
+          document: messageSubscribe,
+          updateQuery: (prev, { subscriptionData }) => {
+            console.log("subscribed data", subscriptionData);
+            if (!subscriptionData.data) {
+              return prev;
+            }
+            const newMessage = subscriptionData.data.onNewMessage;
+            return Object.assign({}, prev, {
+              messages: [newMessage, ...prev.messages]
+            });
+          }
+        });
+      }
+    })
+})(Messages);

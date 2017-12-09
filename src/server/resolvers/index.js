@@ -5,6 +5,7 @@ import {
   findUser,
   addMessage
 } from "../connectors";
+import pubsub from "../pubsub";
 
 export default {
   Message: {
@@ -25,6 +26,15 @@ export default {
   Mutation: {
     addMessage(_, args, ctx) {
       return addMessage(args);
+    }
+  },
+  Subscription: {
+    onNewMessage: {
+      resolve(payload) {
+        console.log("Subscription", payload);
+        return payload;
+      },
+      subscribe: () => pubsub.asyncIterator("ON_NEW_MESSAGE")
     }
   }
 };

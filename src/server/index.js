@@ -3,10 +3,14 @@ import bodyParser from "body-parser";
 import { graphqlExpress, graphiqlExpress } from "apollo-server-express";
 import schema from "./schema";
 const PORT = 8000;
+import pubsub from "./pubsub";
+import setupFunctions from "./setupFunctions";
+import { execute, subscribe } from "graphql";
+import { createServer } from "http";
+import { PubSub, SubscriptionManager } from "graphql-subscriptions";
+import { SubscriptionServer } from "subscriptions-transport-ws";
 
 const app = express();
-
-// bodyParser is needed just for POST.
 app.use("/graphql", bodyParser.json(), graphqlExpress({ schema }));
 app.use(
   "/graphiql",
@@ -14,5 +18,13 @@ app.use(
     endpointURL: "/graphql"
   })
 );
+const server = createServer(app);
 
-app.listen(PORT);
+new SubscriptionServer(
+  { schema, execute, subscribe },
+  { server, path: "/subscriptions" }
+);
+
+// bodyParser is needed just for POST.
+
+server.listen(PORT);
