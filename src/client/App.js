@@ -4,8 +4,7 @@ import { ApolloClient } from "apollo-client";
 import { HttpLink } from "apollo-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { ApolloProvider } from "react-apollo";
-import Messages from "./Messages";
-
+import Chat from "./Chat";
 const client = new ApolloClient({
   // By default, this client will send queries to the
   //  `/graphql` endpoint on the same host
@@ -17,7 +16,7 @@ class App extends Component {
   render() {
     return (
       <ApolloProvider client={client}>
-        <Messages />
+        <Chat />
       </ApolloProvider>
     );
   }
