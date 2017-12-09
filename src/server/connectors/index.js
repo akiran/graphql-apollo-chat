@@ -1,3 +1,5 @@
+import uuid from "uuid";
+
 let users = [{ firstName: "Bot", lastName: "", id: "1" }];
 let messages = [{ id: "1", user: "1", text: "Lets chat ..." }];
 
@@ -23,7 +25,12 @@ export function findMessage(id) {
   return message;
 }
 
-export function addMessage(message) {
-  messages = messages.concat(message);
-  return messages;
+export function addMessage({ text, userId }) {
+  const newMessage = {
+    id: uuid.v4(),
+    text,
+    user: userId
+  };
+  messages = messages.concat(newMessage);
+  return newMessage;
 }

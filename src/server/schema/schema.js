@@ -18,7 +18,12 @@ export default `
     Message: Message
   }
 
+  type Mutation {
+    addMessage(text: String!, userId: ID!): Message
+  }
+
   schema {
     query: Query
+    mutation: Mutation
   }
 `;

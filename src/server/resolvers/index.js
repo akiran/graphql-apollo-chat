@@ -1,8 +1,15 @@
-import { findUsers, findMessages, findMessage, findUser } from "../connectors";
+import {
+  findUsers,
+  findMessages,
+  findMessage,
+  findUser,
+  addMessage
+} from "../connectors";
 
 export default {
   Message: {
-    user: (obj, args, ctx) => findUser(obj.user)
+    id: obj => obj.id,
+    user: obj => findUser(obj.user)
   },
   Query: {
     users(_, args, ctx) {
@@ -13,6 +20,11 @@ export default {
     },
     message(_, args, ctx) {
       return findMessage(args.id);
+    }
+  },
+  Mutation: {
+    addMessage(_, args, ctx) {
+      return addMessage(args);
     }
   }
 };

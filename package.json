@@ -21,7 +21,8 @@
     "react-apollo": "^2.0.4",
     "react-dom": "^16.0.0",
     "react-scripts": "1.0.17",
-    "subscriptions-transport-ws": "^0.9.4"
+    "subscriptions-transport-ws": "^0.9.4",
+    "uuid": "^3.1.0"
   },
   "scripts": {
     "server": "nodemon --exec 'babel-node --presets=es2015,stage-0' --watch 'src/server/**/*.*' ./src/server/index.js",
