@@ -15,10 +15,7 @@ export function addUser(user) {
 }
 
 export function findMessages() {
-  return messages.map(message => ({
-    ...message,
-    user: findUser(message.user)
-  }));
+  return messages.map(message => findMessage(message.id));
 }
 
 export function findMessage(id) {

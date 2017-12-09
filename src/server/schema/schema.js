@@ -14,5 +14,7 @@ export default `
   type Query {
     users: [User],
     messages: [Message],
+    message(id: ID!): Message,
+    Message: Message
   }
 `;

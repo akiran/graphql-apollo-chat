@@ -6,8 +6,10 @@ export default {
       return findUsers();
     },
     messages(_, args, ctx) {
-      console.log(findMessages());
       return findMessages();
+    },
+    message(_, args, ctx) {
+      return findMessage(args.id);
     }
   }
 };
