@@ -1,9 +1,18 @@
 export default `
   type User {
+    id: ID!
     firstName: String
+    lastName: String
+  }
+
+  type Message {
+    id: ID!
+    user: User
+    text: String
   }
 
   type Query {
-    user: User
+    users: [User],
+    messages: [Message],
   }
 `;
