@@ -25,11 +25,10 @@ export function findMessage(id) {
   return message;
 }
 
-export function addMessage({ text, userId }) {
+export function addMessage({ text }) {
   const newMessage = {
     id: uuid.v4(),
-    text,
-    user: userId
+    text
   };
   messages = messages.concat(newMessage);
   return newMessage;

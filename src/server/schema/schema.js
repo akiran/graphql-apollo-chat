@@ -19,7 +19,7 @@ export default `
   }
 
   type Mutation {
-    addMessage(text: String!, userId: ID!): Message
+    addMessage(text: String!): Message
   }
 
   schema {
