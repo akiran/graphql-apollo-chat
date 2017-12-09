@@ -13,8 +13,12 @@ export default `
 
   type Query {
     users: [User],
-    messages: [Message],
+    messages: [Message!]!,
     message(id: ID!): Message,
     Message: Message
+  }
+
+  schema {
+    query: Query
   }
 `;
