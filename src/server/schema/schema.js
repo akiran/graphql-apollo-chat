@@ -19,7 +19,7 @@ export default `
   }
 
   type Mutation {
-    addMessage(text: String!): Message
+    addMessage(id: ID!, text: String!): Message
   }
 
   type Subscription {

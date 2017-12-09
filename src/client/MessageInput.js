@@ -1,6 +1,7 @@
 import React from "react";
 import gql from "graphql-tag";
 import { graphql } from "react-apollo";
+import uuid from "uuid";
 
 export class MessageInput extends React.Component {
   constructor(props) {
@@ -20,15 +21,17 @@ export class MessageInput extends React.Component {
     }
     if (e.key === "Enter") {
       console.log("send");
+      const newID = uuid.v4();
       this.props.mutate({
         variables: {
-          text: this.state.text
+          text: this.state.text,
+          id: newID
         },
         optimisticResponse: {
           __typename: "Mutation",
           addMessage: {
             __typename: "Message",
-            id: "tempid",
+            id: newID,
             text: this.state.text
           }
         },
@@ -72,8 +75,8 @@ const messagesQuery = gql`
 `;
 
 const addMessageMutation = gql`
-  mutation addMessageMutation($text: String!) {
-    addMessage(text: $text) {
+  mutation addMessageMutation($id: ID!, $text: String!) {
+    addMessage(id: $id, text: $text) {
       id
       text
     }

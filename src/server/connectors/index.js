@@ -26,9 +26,9 @@ export function findMessage(id) {
   return message;
 }
 
-export function addMessage({ text }) {
+export function addMessage({ id, text }) {
   const newMessage = {
-    id: uuid.v4(),
+    id,
     text
   };
   messages = messages.concat(newMessage);

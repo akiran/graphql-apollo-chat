@@ -51,8 +51,12 @@ export default graphql(messagesQuery, {
               return prev;
             }
             const newMessage = subscriptionData.data.onNewMessage;
+            console.log(newMessage, prev.messages);
+            if (prev.messages.find(message => message.id === newMessage.id)) {
+              return prev;
+            }
             return Object.assign({}, prev, {
-              messages: [newMessage, ...prev.messages]
+              messages: [...prev.messages, newMessage]
             });
           }
         });
