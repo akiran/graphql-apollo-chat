@@ -12,12 +12,7 @@ import { SubscriptionServer } from "subscriptions-transport-ws";
 
 const app = express();
 app.use("/graphql", bodyParser.json(), graphqlExpress({ schema }));
-app.use(
-  "/graphiql",
-  graphiqlExpress({
-    endpointURL: "/graphql"
-  })
-);
+
 const server = createServer(app);
 
 new SubscriptionServer(
@@ -25,6 +20,12 @@ new SubscriptionServer(
   { server, path: "/subscriptions" }
 );
 
+app.use(
+  "/graphiql",
+  graphiqlExpress({
+    endpointURL: "/graphql"
+  })
+);
 // bodyParser is needed just for POST.
 
 server.listen(PORT);
