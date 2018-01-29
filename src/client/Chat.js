@@ -1,13 +1,11 @@
 import React from "react";
 import Messages from "./Messages";
 import MessageInput from "./MessageInput";
-import { UPDATE_NETWORK_STATUS } from './local-state/mutations'
-import {graphql} from 'react-apollo'
-// import {updateNetworkStatus} from './local-state/mutations'
+import {updateNetworkStatus} from './local-state/mutations'
 
-class Chat extends React.Component {
+export default class Chat extends React.Component {
   componentDidMount() {
-    // updateNetworkStatus(false)
+    updateNetworkStatus(true)
   }
   render() {
     return (
@@ -18,11 +16,3 @@ class Chat extends React.Component {
     );
   }
 }
-
-const WrappedComponent = graphql(UPDATE_NETWORK_STATUS, {
-  props: ({ mutate }) => ({
-    updateNetworkStatus: isConnected => mutate({ variables: { isConnected } }),
-  }),
-})(Chat);
-
-export default WrappedComponent
