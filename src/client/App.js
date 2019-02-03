@@ -7,7 +7,7 @@ import Chat from "./Chat";
 import { SubscriptionClient } from "subscriptions-transport-ws";
 import { WebSocketLink } from "apollo-link-ws";
 
-const wsClient = new SubscriptionClient("ws://localhost:8000/subscriptions", {
+const wsClient = new SubscriptionClient("ws://localhost:8000/graphql", {
   reconnect: true
 });
 

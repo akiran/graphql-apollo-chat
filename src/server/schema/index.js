@@ -1,10 +1,34 @@
-import { makeExecutableSchema } from "graphql-tools";
-import Resolvers from "../resolvers";
-import Schema from "./schema";
+export default `
+  type User {
+    id: ID!
+    firstName: String
+    lastName: String
+  }
 
-export const executableSchema = makeExecutableSchema({
-  typeDefs: Schema,
-  resolvers: Resolvers
-});
+  type Message {
+    id: ID!
+    user: User
+    text: String
+  }
 
-export default executableSchema;
+  type Query {
+    users: [User],
+    messages: [Message!]!,
+    message(id: ID!): Message,
+    Message: Message
+  }
+
+  type Mutation {
+    addMessage(id: ID!, text: String!): Message
+  }
+
+  type Subscription {
+    onNewMessage: Message
+  }
+
+  schema {
+    query: Query
+    mutation: Mutation
+    subscription: Subscription
+  }
+`;
