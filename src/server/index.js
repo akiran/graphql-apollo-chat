@@ -25,4 +25,6 @@ app.use(
   })
 );
 
-server.listen(PORT);
+server.listen(PORT, function() {
+  console.log(`Server running on port ${PORT}`);
+});
